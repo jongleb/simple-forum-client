@@ -9,35 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var auth_service_1 = require('../services/auth.service');
 var router_1 = require('@angular/router');
-var LayoutComponent = (function () {
-    function LayoutComponent(authService, router) {
+var auth_service_1 = require('../services/auth.service');
+var register_1 = require("../models/register");
+var RegisterComponent = (function () {
+    function RegisterComponent(authService, router) {
         this.authService = authService;
         this.router = router;
+        this.model = new register_1.Register(null, null, null);
     }
-    LayoutComponent.prototype.logout = function () {
+    RegisterComponent.prototype.register = function () {
         var _this = this;
-        this.authService.logout()
-            .then(function () {
-            localStorage.removeItem('currentUser');
-            _this.userLogined = false;
+        this.authService.register(this.model)
+            .then(function (res) {
             _this.router.navigate(['/messages/list']);
         });
     };
-    LayoutComponent.prototype.ngOnInit = function () {
-        var storeUsr = localStorage.getItem('currentUser');
-        this.userLogined = storeUsr !== undefined && storeUsr !== null;
-    };
-    LayoutComponent = __decorate([
+    RegisterComponent = __decorate([
         core_1.Component({
-            selector: 'main-layout',
-            templateUrl: 'src/app/layout/layout.component.html',
-            styleUrls: ['src/app/layout/layout.component.css']
+            templateUrl: 'src/app/register/register.component.html'
         }), 
         __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
-    ], LayoutComponent);
-    return LayoutComponent;
+    ], RegisterComponent);
+    return RegisterComponent;
 }());
-exports.LayoutComponent = LayoutComponent;
-//# sourceMappingURL=layout.component.js.map
+exports.RegisterComponent = RegisterComponent;
+//# sourceMappingURL=register.component.js.map

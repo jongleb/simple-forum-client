@@ -23,6 +23,7 @@ var MessageEditComponent = (function () {
         var _this = this;
         this.route.params.map(function (params) { return params['id']; })
             .subscribe(function (id) {
+            _this.id = id;
             _this.messageService.getMessageById(id).then(function (res) {
                 _this.message = res;
             })
@@ -33,7 +34,7 @@ var MessageEditComponent = (function () {
     };
     MessageEditComponent.prototype.onSubmited = function () {
         var _this = this;
-        this.messageService.sendMessage(this.message)
+        this.messageService.updateMessage(this.id, this.message)
             .then(function (res) {
             _this.router.navigate(['/messages/list']);
         })

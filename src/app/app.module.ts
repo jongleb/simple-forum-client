@@ -14,6 +14,7 @@ import {AuthService} from "./services/auth.service";
 import {Http, ConnectionBackend, RequestOptions, XHRBackend} from '@angular/http';
 
 import {HttpInterceptor} from './extensions/http-interceptor.service';
+import {RegisterComponent} from "./register/register.component";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {HttpInterceptor} from './extensions/http-interceptor.service';
     declarations: [
         AppComponent,
         LayoutComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     providers: [
         AuthGuard,

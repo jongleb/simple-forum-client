@@ -7,6 +7,9 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 import {Constants} from "../constants";
+import {User} from "../models/user";
+import {Register} from "../models/register";
+import {Login} from "../models/login";
 
 @Injectable()
 export class AuthService {
@@ -21,15 +24,13 @@ export class AuthService {
 
     isLoggedIn:boolean = false;
 
-    redirectUrl:string;
-
-    login(username:string, password:string):Observable<boolean> {
+    login(login:Login):Observable<boolean> {
         return this.http.post(`${Constants.API}users/login`,
-            JSON.stringify({username: username, password: password}),
+            JSON.stringify(login),
             {headers: this.headers})
             .map((response:Response) => {
                 if (response.json().id) {
-                    localStorage.setItem('currentUser',JSON.stringify(response.json()));
+                    localStorage.setItem('currentUser', JSON.stringify(response.json()));
                     return true;
                 } else {
                     return false;
@@ -37,7 +38,20 @@ export class AuthService {
             });
     }
 
-    logout():void {
-        this.isLoggedIn = false;
+    register(data:Register):Promise<User> {
+        return this.http
+            .post(
+                `${Constants.API}users`,
+                JSON.stringify(data),
+                {headers: this.headers}
+            )
+            .toPromise()
+            .then(res=>res.json());
+    }
+
+    logout():Promise<any> {
+        return this.http
+            .post(`${Constants.API}users/logout/?access_token=${JSON.parse(localStorage.getItem('currentUser')).id}`,{},{})
+            .toPromise();
     }
 }

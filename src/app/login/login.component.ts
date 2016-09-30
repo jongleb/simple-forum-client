@@ -19,7 +19,7 @@ export class LoginComponent {
     }
 
     login() {
-        this.authService.login('adminer', '12345').subscribe(result => {
+        this.authService.login(this.model).subscribe(result => {
             if (result === true) {
                 this.router.navigate(['/']);
             } else {
@@ -29,7 +29,4 @@ export class LoginComponent {
         });
     }
 
-    logout() {
-        this.authService.logout();
-    }
 }

@@ -22,7 +22,7 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.login = function () {
         var _this = this;
-        this.authService.login('adminer', '12345').subscribe(function (result) {
+        this.authService.login(this.model).subscribe(function (result) {
             if (result === true) {
                 _this.router.navigate(['/']);
             }
@@ -31,9 +31,6 @@ var LoginComponent = (function () {
                 _this.loading = false;
             }
         });
-    };
-    LoginComponent.prototype.logout = function () {
-        this.authService.logout();
     };
     LoginComponent = __decorate([
         core_1.Component({

@@ -6,7 +6,9 @@
                 <li><a routerLink="messages/create" routerLinkActive="active">Create message</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li><a routerLink="login" routerLinkActive="active">Login</a></li>
+                <li><a routerLink="registration" *ngIf="!userLogined" routerLinkActive="active">Register</a></li>
+                <li><a routerLink="login" *ngIf="!userLogined" routerLinkActive="active">Login</a></li>
+                <li><a (click)="logout()" *ngIf="userLogined" routerLinkActive="active">Logout</a></li>
             </ul>
         </div>
     </div>

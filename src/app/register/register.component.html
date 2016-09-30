@@ -1,15 +1,23 @@
-<form class="form-signin" #loginForm="ngForm">
-    <h2 class="form-signin-heading">Please sign in</h2>
+<form class="form-signin" #registrationForm="ngForm">
+    <h2 class="form-signin-heading">Registration form</h2>
+    <label for="inputUsername" class="sr-only">Email address</label>
+    <input type="text"
+           id="inputUsername"
+           class="form-control"
+           placeholder="username"
+           required
+           #username="ngModel"
+           [(ngModel)]="model.username"
+           name="username">
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email"
            id="inputEmail"
            class="form-control"
            placeholder="Email address"
            required
-           autofocus=""
            #username="ngModel"
-           [(ngModel)]="model.username"
-           name="username">
+           [(ngModel)]="model.email"
+           name="email">
     <label for="inputPassword" class="sr-only">Password</label>
     <input
             type="password"
@@ -20,14 +28,9 @@
             #password="ngModel"
             [(ngModel)]="model.password"
             name="password">
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" value="remember-me"> Remember me
-        </label>
-    </div>
     <button
-            [disabled]="!loginForm.form.valid"
-            (click)="login()"
+            [disabled]="!registrationForm.form.valid"
+            (click)="register()"
             class="btn btn-lg btn-primary btn-block"
-            type="submit">Sign in</button>
+            type="submit">Register</button>
 </form>

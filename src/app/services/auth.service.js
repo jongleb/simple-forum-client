@@ -22,8 +22,8 @@ var AuthService = (function () {
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
     }
-    AuthService.prototype.login = function (username, password) {
-        return this.http.post(constants_1.Constants.API + "users/login", JSON.stringify({ username: username, password: password }), { headers: this.headers })
+    AuthService.prototype.login = function (login) {
+        return this.http.post(constants_1.Constants.API + "users/login", JSON.stringify(login), { headers: this.headers })
             .map(function (response) {
             if (response.json().id) {
                 localStorage.setItem('currentUser', JSON.stringify(response.json()));
@@ -34,8 +34,16 @@ var AuthService = (function () {
             }
         });
     };
+    AuthService.prototype.register = function (data) {
+        return this.http
+            .post(constants_1.Constants.API + "users", JSON.stringify(data), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); });
+    };
     AuthService.prototype.logout = function () {
-        this.isLoggedIn = false;
+        return this.http
+            .post(constants_1.Constants.API + "users/logout/?access_token=" + JSON.parse(localStorage.getItem('currentUser')).id, {}, {})
+            .toPromise();
     };
     AuthService = __decorate([
         core_1.Injectable(), 

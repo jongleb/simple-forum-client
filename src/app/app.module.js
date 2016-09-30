@@ -18,6 +18,7 @@ var message_module_1 = require("./message/message.module");
 var login_component_1 = require("./login/login.component");
 var auth_guard_service_1 = require("./services/auth-guard.service");
 var auth_service_1 = require("./services/auth.service");
+var register_component_1 = require("./register/register.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -32,7 +33,8 @@ var AppModule = (function () {
             declarations: [
                 app_component_ts_1.AppComponent,
                 layout_component_1.LayoutComponent,
-                login_component_1.LoginComponent
+                login_component_1.LoginComponent,
+                register_component_1.RegisterComponent
             ],
             providers: [
                 auth_guard_service_1.AuthGuard,

@@ -9,10 +9,11 @@ import {Router, ActivatedRoute} from '@angular/router';
 export class MessageEditComponent implements OnInit {
 
     message:Message = new Message(null, null);
-
+    id:number;
     ngOnInit() {
         this.route.params.map(params => params['id'])
             .subscribe((id) => {
+                this.id = id;
                 this.messageService.getMessageById(id).then(
                     res=> {
                         this.message = res;
@@ -30,7 +31,7 @@ export class MessageEditComponent implements OnInit {
     }
 
     onSubmited() {
-        this.messageService.sendMessage(this.message)
+        this.messageService.updateMessage(this.id, this.message)
             .then(res=> {
                 this.router.navigate(['/messages/list']);
             })
